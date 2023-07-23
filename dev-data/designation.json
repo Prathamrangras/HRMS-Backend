@@ -1,0 +1,23 @@
+[
+  {
+    "_id": {
+      "$oid": "64baeeb113d1cdd7f5350049"
+    },
+    "name": "CEO",
+    "Type": 0
+  },
+  {
+    "_id": {
+      "$oid": "64baeeb113d1cdd7f5350048"
+    },
+    "name": "HOD",
+    "Type": 1
+  },
+  {
+    "_id": {
+      "$oid": "64baeeb113d1cdd7f5350047"
+    },
+    "name": "EXECUTIVE",
+    "Type": 2
+  }
+]

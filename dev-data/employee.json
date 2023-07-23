@@ -1,0 +1,37 @@
+[
+  {
+    "name": "yudish",
+    "dateOfBirth": "3rdApril2002",
+    "phoneNo": 9810870142,
+    "email": "yudi@gmail.com",
+    "password": "$2a$12$xZVToQU7fb1shk26Wlc0ZOZy7fEa4Fp6FavsFfejaxbD9GIr6Uj4i",
+    "role": "Manager",
+    "managerId": [],
+    "designationId": 0
+  },
+  {
+    "name": "tushar",
+    "dateOfBirth": "3rdApril2002",
+    "phoneNo": 9810870142,
+    "email": "yudi@gmail.com",
+    "password": "$2a$12$xZVToQU7fb1shk26Wlc0ZOZy7fEa4Fp6FavsFfejaxbD9GIr6Uj4i",
+    "role": "Manager",
+    "managerId": [],
+
+    "designationId": 0
+  },
+  {
+    "_id": {
+      "$oid": "64bad26413d1cdd7f535003c"
+    },
+    "name": "tanisha",
+    "dateOfBirth": "3rdApril2002",
+    "phoneNo": 9810870142,
+    "email": "yudi@gmail.com",
+    "password": "$2a$12$xZVToQU7fb1shk26Wlc0ZOZy7fEa4Fp6FavsFfejaxbD9GIr6Uj4i",
+    "role": "Manager",
+    "managerId": [],
+
+    "designationId": 0
+  }
+]
