@@ -2,6 +2,9 @@ import mongoose from "mongoose";
 
 const designation_schema = new mongoose.Schema(
   {
+    _id: {
+      type: String,
+    },
     name: String,
     Type: Number,
   },

@@ -1,7 +1,10 @@
 import mongoose from "mongoose";
 
 const department_schema = mongoose.Schema({
-  id: String,
+  _id: {
+    type: String,
+  },
+  Type: Number,
   name: String,
 });
 

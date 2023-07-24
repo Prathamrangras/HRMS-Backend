@@ -1,14 +1,13 @@
 import department from "../models/department.js";
 import Postition from "../models/position.js";
+import { genId } from "../utils/genId.js";
 
 //create a new department
 export const createdepartment = async (req, res) => {
-  const { departmentId, departmentName } = req.body;
-
   try {
     const data = await department.create({
-      id: departmentId,
-      name: departmentName,
+      _id: genId(),
+      ...req.body,
     });
     res.status(200).json(data);
   } catch (error) {
@@ -21,7 +20,7 @@ export const getdepartment = async (req, res) => {
   const { id } = req.params;
 
   try {
-    const data = department.findOne({ id: id });
+    const data = await department.findById(id);
     res.status(200).json({ status: "success", data });
   } catch (error) {
     console.log(error);
@@ -54,7 +53,7 @@ export const getAlldepartments = async (req, res) => {
 export const deletedepartment = async (req, res) => {
   try {
     const { id } = req.params;
-    await department.deleteOne({ id: id });
+    await department.findOneAndDelete({ _id: id });
     res
       .status(200)
       .json({ status: "success", message: "department Delted successfully" });
@@ -67,7 +66,7 @@ export const deletedepartment = async (req, res) => {
 export const editdepartment = async (req, res) => {
   try {
     const { id } = req.params;
-    const data = await department.findOneAndUpdate({ id: id }, req.body, {
+    const data = await department.findOneAndUpdate({ _id: id }, req.body, {
       new: true,
     });
     res.status(200).json({

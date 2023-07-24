@@ -1,12 +1,10 @@
 import mongoose from "mongoose";
-import { v4 as uuidv4 } from "uuid";
 import bcrypt from "bcryptjs";
 
 const employee_schema = new mongoose.Schema(
   {
-    id: {
+    _id: {
       type: String,
-      default: uuidv4(),
     },
     name: String,
     dateOfBirth: String,
@@ -15,16 +13,24 @@ const employee_schema = new mongoose.Schema(
     password: {
       type: String,
     },
-    positionId: String,
-    companyId: String,
+    positionType: Number,
+    companyId: {
+      type: String,
+      ref: "Employee",
+    },
     role: {
       type: String,
       enum: ["Manager", "Employee"],
       default: "Employee",
     },
-    managerId: [String],
+    managerId: [
+      {
+        type: String,
+        ref: "Employee",
+      },
+    ],
 
-    designationId: Number,
+    designationType: Number,
   },
   { timestamps: true }
 );

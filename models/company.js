@@ -1,7 +1,8 @@
 import mongoose from "mongoose";
-
 const company_schema = mongoose.Schema({
-  id: String,
+  _id: {
+    type: String,
+  },
   name: String,
 });
 

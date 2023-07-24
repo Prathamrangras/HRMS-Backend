@@ -1,5 +1,6 @@
 import Employee from "../models/employee.js";
 import { signToken } from "../utils/signtoken.js";
+import { v4 as uuidv4 } from "uuid";
 
 export const getJr = async (req, res) => {
   try {
@@ -18,8 +19,10 @@ export const createEmployee = async (req, res) => {
      and then push the creators id also
     */
     const { CreatorId } = req.body;
-    const Creator = await Employee.findOne({ id: CreatorId });
+    const Creator = await Employee.findById(CreatorId);
+    const id = uuidv4();
     const managerArr = Creator.managerId;
+    req.body.employee._id = id;
     req.body.employee.managerId = [...managerArr, CreatorId];
     const data = new Employee(req.body.employee);
 

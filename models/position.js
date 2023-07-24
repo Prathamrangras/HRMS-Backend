@@ -1,9 +1,11 @@
 import mongoose from "mongoose";
-
 const position_schema = mongoose.Schema(
   {
-    id: String,
-    departmentId: String,
+    _id: {
+      type: String,
+    },
+    departmentType: Number,
+    Type: Number,
     name: String,
   },
   { timestamps: true }
