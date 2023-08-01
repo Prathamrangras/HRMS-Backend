@@ -1,5 +1,5 @@
 import department from "../models/department.js";
-import Postition from "../models/position.js";
+import Position from "../models/position.js";
 import { genId } from "../utils/genId.js";
 
 //create a new department
@@ -27,11 +27,11 @@ export const getdepartment = async (req, res) => {
   }
 };
 
-//get positions with specific id of department
+//get positions with specific type of department
 export const getPositionsBydepartment = async (req, res) => {
   try {
-    const { deptId } = req.params;
-    const data = await Postition.find({ departmentId: deptId });
+    const { type } = req.params;
+    const data = await Position.find({ departmentType: type });
     res.status(200).json({ status: "success", data });
   } catch (error) {
     console.log(error);

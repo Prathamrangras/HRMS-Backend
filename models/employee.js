@@ -13,10 +13,9 @@ const employee_schema = new mongoose.Schema(
     password: {
       type: String,
     },
-    positionType: Number,
-    companyId: {
+    positionID: {
       type: String,
-      ref: "Employee",
+      ref: "Position",
     },
     role: {
       type: String,
@@ -29,8 +28,25 @@ const employee_schema = new mongoose.Schema(
         ref: "Employee",
       },
     ],
-
-    designationType: Number,
+    company: {
+      type: String,
+      ref: "Company",
+    },
+    accessArray: [
+      {
+        type: String,
+        ref: "Access",
+      },
+    ],
+    designationID: {
+      type: String,
+      ref: "Designation",
+    },
+    departmentID: {
+      type: String,
+      ref: "Department",
+    },
+    isSudo: Boolean,
   },
   { timestamps: true }
 );

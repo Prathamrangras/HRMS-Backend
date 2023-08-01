@@ -4,9 +4,21 @@ import { v4 as uuidv4 } from "uuid";
 
 export const getJr = async (req, res) => {
   try {
-    const { id } = req.params;
-    const dataArr = await Employee.find({ managerId: { $in: [id] } });
+    const id = req.user._id;
+    const dataArr = await Employee.find({ managerId: { $in: [id] } }).populate(
+      "designationID"
+    );
     res.status(200).json(dataArr);
+  } catch (error) {
+    console.log(error);
+  }
+};
+
+export const getEmployeeByID = async (req, res) => {
+  try {
+    const id = req.params.id;
+    const data = await Employee.findById(id);
+    res.status(200).json({ employee: data });
   } catch (error) {
     console.log(error);
   }
@@ -18,9 +30,12 @@ export const createEmployee = async (req, res) => {
      to managerId array of user created in this query
      and then push the creators id also
     */
+    console.log(req.body);
+
     const { CreatorId } = req.body;
     const Creator = await Employee.findById(CreatorId);
     const id = uuidv4();
+    console.log(CreatorId);
     const managerArr = Creator.managerId;
     req.body.employee._id = id;
     req.body.employee.managerId = [...managerArr, CreatorId];
@@ -36,26 +51,29 @@ export const createEmployee = async (req, res) => {
 
 export const login = async (req, res) => {
   const { email, password } = req.body;
-  console.log(req.body);
-  if (!email || !password) {
-    return res.status(404).json({
-      status: "fail",
-      message: "Missing EmailId or Password",
-    });
-  }
-  const user = await Employee.findOne({ email: email });
+  try {
+    if (!email || !password) {
+      return res.status(404).json({
+        status: "fail",
+        message: "Missing EmailId or Password",
+      });
+    }
+    const user = await Employee.findOne({ email: email });
 
-  console.log(user);
-
-  if (user && (await user.matchPasswords(password))) {
-    res.status(200).json({
-      status: "success",
-      token: signToken(user, "1h"),
-    });
-  } else {
-    res.status(401).json({
-      status: "fail",
-      message: "invalid emailid or password",
-    });
+    if (user && (await user.matchPasswords(password))) {
+      delete user["password"];
+      res.status(200).json({
+        status: "success",
+        user,
+        token: signToken(user, "1h"),
+      });
+    } else {
+      res.status(401).json({
+        status: "fail",
+        message: "invalid emailid or password",
+      });
+    }
+  } catch (error) {
+    console.log(error);
   }
 };

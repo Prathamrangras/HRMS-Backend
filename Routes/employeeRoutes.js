@@ -1,12 +1,21 @@
 import express from "express";
-import { createEmployee, getJr, login } from "../controllers/employee.js";
+import {
+  createEmployee,
+  getJr,
+  login,
+  getEmployeeByID,
+} from "../controllers/employee.js";
+import { checkToken } from "../middlewares/AuthMiddleware.js";
 
 const router = express.Router();
 
-router.get("/getJr/:id", getJr);
+router.post("/login", login);
+
+// router.use(checkToken);
+
+router.get("/getJr", checkToken, getJr);
+router.get("/:id", checkToken, getEmployeeByID);
 
 router.post("/create", createEmployee);
-
-router.post("/login", login);
 
 export default router;

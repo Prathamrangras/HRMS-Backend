@@ -18,7 +18,7 @@ router
   .patch(editdepartment)
   .delete(deletedepartment);
 
-router.get("/:deptId", getPositionsBydepartment);
+router.get("/pos/:type", getPositionsBydepartment);
 
 router.post("/create", createdepartment);
 

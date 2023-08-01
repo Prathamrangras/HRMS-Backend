@@ -1,16 +1,22 @@
 import express from "express";
-import Designation from "../models/designation.js";
+import {
+  createDesignation,
+  deleteDesignation,
+  editDesignation,
+  getAllDesignations,
+  getDesignation,
+} from "../controllers/designation.js";
 
 const router = express.Router();
 
-router.post("/create", async (req, res) => {
-  try {
-    const data = new Designation(req.body);
-    const result = await data.save();
-    res.status(200).json(result);
-  } catch (error) {
-    console.log(error);
-  }
-});
+router.get("/", getAllDesignations);
+
+router
+  .route("/:id")
+  .get(getDesignation)
+  .patch(editDesignation)
+  .delete(deleteDesignation);
+
+router.post("/create", createDesignation);
 
 export default router;
