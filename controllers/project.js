@@ -26,7 +26,7 @@ export const getProject = async (req, res) => {
 // get Project with the specific id
 export const getAllProjects = async (req, res) => {
   try {
-    const data = await Project.find({});
+    const data = await Project.find({}).populate("Category");
     res.status(200).json({ status: "success", data });
   } catch (error) {
     console.log(error);
