@@ -1,6 +1,7 @@
 import Employee from "../models/employee.js";
 import { signToken } from "../utils/signtoken.js";
 import { v4 as uuidv4 } from "uuid";
+import Email from "../utils/email.js";
 
 export const getJr = async (req, res) => {
   try {
@@ -42,6 +43,12 @@ export const createEmployee = async (req, res) => {
     const data = new Employee(req.body.employee);
 
     const result = await data.save();
+
+    const url = "http://localhost/3000/login";
+    await new Email(req.body.employee, url).sendWelcome(
+      result.email,
+      req.body.employee.password
+    );
 
     res.status(200).json(result);
   } catch (error) {
