@@ -6,15 +6,16 @@ import {
   getEmployeeByID,
 } from "../controllers/employee.js";
 import { checkToken } from "../middlewares/AuthMiddleware.js";
+import { EmployeeAcessCheck } from "../middlewares/acessMiddleware.js";
 
 const router = express.Router();
 
 router.post("/login", login);
 
-// router.use(checkToken);
+router.use(checkToken);
 
-router.get("/getJr", checkToken, getJr);
-router.get("/:id", checkToken, getEmployeeByID);
+router.get("/getJr", getJr);
+router.get("/:id", getEmployeeByID);
 
 router.post("/create", createEmployee);
 

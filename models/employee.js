@@ -9,6 +9,7 @@ const employee_schema = new mongoose.Schema(
     name: String,
     dateOfBirth: String,
     phoneNo: Number,
+    Photo: String,
     email: String,
     password: {
       type: String,

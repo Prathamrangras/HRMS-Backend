@@ -31,7 +31,6 @@ export const createEmployee = async (req, res) => {
      to managerId array of user created in this query
      and then push the creators id also
     */
-    console.log(req.body);
 
     const { CreatorId } = req.body;
     const Creator = await Employee.findById(CreatorId);
