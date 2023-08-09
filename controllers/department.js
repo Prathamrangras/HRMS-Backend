@@ -1,6 +1,7 @@
 import department from "../models/department.js";
 import Position from "../models/position.js";
 import { genId } from "../utils/genId.js";
+import { login } from "./employee.js";
 
 //create a new department
 export const createdepartment = async (req, res) => {
@@ -38,10 +39,11 @@ export const getPositionsBydepartment = async (req, res) => {
   }
 };
 
-// get department with the specific id
+// get all departments
 export const getAlldepartments = async (req, res) => {
   try {
-    const data = await department.find({});
+    const data = await department.find({}).populate("DepartmentHead");
+
     res.status(200).json({ status: "success", data });
   } catch (error) {
     console.log(error);
