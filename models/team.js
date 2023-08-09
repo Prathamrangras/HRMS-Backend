@@ -18,6 +18,10 @@ const team_schema = mongoose.Schema({
     default: null,
     ref: "Project",
   },
+  chatGroup: {
+    type: String,
+    ref: "Chat",
+  },
 });
 
 const Team = mongoose.model("Team", team_schema);

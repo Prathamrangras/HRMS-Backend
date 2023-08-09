@@ -8,6 +8,7 @@ import taskRoutes from "./Routes/taskRoutes.js";
 import accessRoutes from "./Routes/accessRoutes.js";
 import companyRoutes from "./Routes/companyRoutes.js";
 import projectRoutes from "./Routes/projectRoutes.js";
+import holidayRoutes from "./Routes/holidayRoutes.js";
 import teamRoutes from "./Routes/teamRoutes.js";
 import cors from "cors";
 import "dotenv/config";
@@ -43,6 +44,7 @@ app.use("/api/company", companyRoutes);
 app.use("/api/designation", designationRoutes);
 app.use("/api/project", projectRoutes);
 app.use("/api/team", teamRoutes);
+app.use("/api/holiday", holidayRoutes);
 
 const server = app.listen(port, () => {
   console.log("server started");

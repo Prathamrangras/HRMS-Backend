@@ -41,7 +41,7 @@ export const getPositionsBydepartment = async (req, res) => {
 // get department with the specific id
 export const getAlldepartments = async (req, res) => {
   try {
-    const data = await department.find({});
+    const data = await department.find({}).populate("DepartmentHead");
     res.status(200).json({ status: "success", data });
   } catch (error) {
     console.log(error);
