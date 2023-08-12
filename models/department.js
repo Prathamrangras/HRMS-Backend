@@ -6,6 +6,7 @@ const department_schema = mongoose.Schema({
   },
   Type: Number,
   name: String,
+  Image: String,
   DepartmentHead: {
     type: String,
     ref: "Employee",

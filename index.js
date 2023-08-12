@@ -10,6 +10,7 @@ import companyRoutes from "./Routes/companyRoutes.js";
 import projectRoutes from "./Routes/projectRoutes.js";
 import holidayRoutes from "./Routes/holidayRoutes.js";
 import teamRoutes from "./Routes/teamRoutes.js";
+import leaveRoutes from "./Routes/leaveRoutes.js";
 import cors from "cors";
 import "dotenv/config";
 
@@ -45,7 +46,7 @@ app.use("/api/designation", designationRoutes);
 app.use("/api/project", projectRoutes);
 app.use("/api/team", teamRoutes);
 app.use("/api/holiday", holidayRoutes);
-
+app.use("/api/leave", leaveRoutes);
 const server = app.listen(port, () => {
   console.log("server started");
 });

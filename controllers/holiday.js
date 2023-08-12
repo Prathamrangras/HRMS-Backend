@@ -23,7 +23,7 @@ export const getHoliday = async (req, res) => {
   }
 };
 
-// get Holiday with the specific id
+// get all Holidays
 export const getAllHolidays = async (req, res) => {
   try {
     const data = await Holiday.find({});
