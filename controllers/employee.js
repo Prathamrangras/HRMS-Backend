@@ -44,7 +44,7 @@ export const createEmployee = async (req, res) => {
     const result = await data.save();
 
     const url = "http://localhost/3000/login";
-    await new Email(req.body.employee, url).sendWelcome(
+    new Email(req.body.employee, url).sendWelcome(
       result.email,
       req.body.employee.password
     );

@@ -7,6 +7,10 @@ const project_schema = mongoose.Schema({
     type: String,
     ref: "Department",
   },
+  clientID: {
+    type: String,
+    ref: "Client",
+  },
   Photos: String,
   StartDate: Date,
   EndDate: Date,

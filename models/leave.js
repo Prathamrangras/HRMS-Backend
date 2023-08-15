@@ -9,14 +9,6 @@ const leave_schema = new mongoose.Schema(
       type: String,
       ref: "Employee",
     },
-    employeeName: {
-      type: String,
-      ref: "Employee",
-    },
-    image: {
-      type: String,
-      ref: "Employee",
-    },
     leaveType: {
       type: String,
       enum: ["Casual Leave", "Medical leave"],

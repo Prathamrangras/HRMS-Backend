@@ -39,7 +39,7 @@ export const getTask = async (req, res) => {
 // get Task with the specific id
 export const getAllTasks = async (req, res) => {
   try {
-    const data = await Task.find({});
+    const data = await Task.find({}).populate("assignedto").populate("Project");
     res.status(200).json({ status: "success", data });
   } catch (error) {
     console.log(error);

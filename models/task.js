@@ -6,7 +6,8 @@ const task_schema = mongoose.Schema(
       type: String,
     },
     title: String,
-    lastDate: Date,
+    StartDate: Date,
+    EndDate: Date,
     submission: {
       type: Date,
       default: null,
@@ -14,6 +15,10 @@ const task_schema = mongoose.Schema(
     isCompleted: {
       type: Boolean,
       default: false,
+    },
+    Project: {
+      type: String,
+      ref: "Project",
     },
     assignedto: {
       type: String,
@@ -23,6 +28,25 @@ const task_schema = mongoose.Schema(
       type: String,
       ref: "Employee",
     },
+    Progress: {
+      type: Number,
+      default: 0,
+      enum: [0, 1, 2, 3],
+    },
+    clientID: {
+      type: String,
+      ref: "Client",
+    },
+    Priority: {
+      type: String,
+      enum: ["mid", "high", "low"],
+    },
+    updates: [
+      {
+        type: String,
+        ref: "Update",
+      },
+    ],
   },
   { timestamps: true }
 );

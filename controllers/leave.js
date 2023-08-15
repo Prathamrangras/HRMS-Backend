@@ -23,11 +23,7 @@ export const createLeave = async (req, res) => {
 export const getLeave = async (req, res) => {
   const { id } = req.params;
   try {
-    const data = await Leave.findById(id).populate(
-      "employeeId",
-      "employeeName",
-      "image"
-    );
+    const data = await Leave.findById(id).populate("employeeId");
     return res.status(200).json({ status: "success", data });
   } catch (error) {
     console.log(error);
