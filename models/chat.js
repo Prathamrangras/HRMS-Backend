@@ -2,7 +2,10 @@ import mongoose from "mongoose";
 
 const chat_schema = mongoose.Schema({
   _id: String,
-  chatName: String,
+  chatName: {
+    type: String,
+    trim: true,
+  },
   isTeamChat: Boolean,
   employees: [
     {
@@ -22,4 +25,9 @@ const chat_schema = mongoose.Schema({
   ],
 });
 
+chat_schema.index({ createdAt: -1 });
+chat_schema.index({ updatedAt: -1 });
+
 const Chat = mongoose.model("Chat", chat_schema);
+
+export default Chat;

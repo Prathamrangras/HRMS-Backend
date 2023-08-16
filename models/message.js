@@ -10,4 +10,10 @@ const message_schema = mongoose.Schema({
     type: String,
     ref: "Chat",
   },
+  readBy: [
+    {
+      type: String,
+      ref: "Employee",
+    },
+  ],
 });
