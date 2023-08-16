@@ -23,7 +23,8 @@ export const checkToken = async (req, res, next) => {
 
     const employee = await Employee.findById(decoded.obj._id)
       .select("-password")
-      .populate("accessArray");
+      .populate("accessArray")
+      .populate("managerId");
     if (!employee) {
       return res.status(401).json({
         status: "fail",

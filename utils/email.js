@@ -25,7 +25,7 @@ class Email {
     });
   }
 
-  async send(obj, subject) {
+  async send(obj, subject, msg) {
     const { email, password } = obj;
     //send actual email
 
@@ -43,7 +43,7 @@ class Email {
       from: this.from,
       to: this.to,
       subject: subject,
-      html: `<h1>Welcome to our company</h1><pre>Your login creds are<br>Email:${email}<br>Password:${password} </pre>`,
+      html: msg,
       //   text: htmlToText.convert(html),
     };
 
@@ -52,8 +52,17 @@ class Email {
 
   async sendWelcome(email, password) {
     await this.send(
-      { email: email, password: password },
-      "Welcome to our company"
+      "Welcome to our company",
+      `<h1>Welcome to our company</h1><pre>Your login creds are<br>Email:${email}<br>Password:${password} </pre>`
+    );
+  }
+
+  async sendLeaveReq(employee, from, to) {
+    await this.send(
+      "Leave Request",
+      `<h1>Hello Sir/Maam this mail is regarding to my leave request from data:${from} to ${to}</h1>
+      <h3>Best Regards</h3>
+      <h3>${employee.name}</h3>`
     );
   }
 }
