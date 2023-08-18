@@ -1,5 +1,6 @@
 import Chats from "../models/chat.js";
 import Employee from "../models/employee.js";
+import { genId } from "../utils/genId.js";
 
 export const getChats = async (req, res) => {
   try {
@@ -11,8 +12,11 @@ export const getChats = async (req, res) => {
           ],
         }
       : {};
-    const chats = Chats.find(keyword).find({});
-    res.status(200).json({
+    const chats = await Chats.find(keyword)
+      .find({})
+      .populate("employees", "name _id photo")
+      .populate("latestMessage");
+    return res.status(200).json({
       status: "success",
       data: chats,
     });
@@ -26,15 +30,15 @@ export const accessChat = async (req, res) => {
   let data = await Chats.find({
     isTeamChat: false,
     $and: [
-      { users: { $elemMatch: { $eq: req.user._id } } },
-      { users: { $elemMatch: { $eq: userid } } },
+      { employees: { $elemMatch: { $eq: req.user._id } } },
+      { employees: { $elemMatch: { $eq: userid } } },
     ],
   })
-    .populate("users", "-password")
+    .populate("employees", "-password")
     .populate("latestMessage");
   data = await Employee.populate(data, {
     path: "latestMessage.sender",
-    select: "name pic email",
+    select: "name photo email",
   });
 
   if (data.length > 0) {
@@ -47,7 +51,7 @@ export const accessChat = async (req, res) => {
     };
 
     try {
-      const createdChat = await Chats.create(chatData);
+      const createdChat = await Chats.create({ _id: genId(), ...chatData });
       const FullChat = await Chats.findOne({ _id: createdChat._id }).populate(
         "employees",
         "-password"
@@ -59,3 +63,11 @@ export const accessChat = async (req, res) => {
     }
   }
 };
+
+export const createGroupChat = async (req, res) => {};
+
+export const renameGroup = async (req, res) => {};
+
+export const removeFromGroup = async (req, res) => {};
+
+export const addToGroup = async (req, res) => {};

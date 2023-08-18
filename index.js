@@ -12,6 +12,8 @@ import holidayRoutes from "./Routes/holidayRoutes.js";
 import teamRoutes from "./Routes/teamRoutes.js";
 import leaveRoutes from "./Routes/leaveRoutes.js";
 import clientRoutes from "./Routes/clientRoutes.js";
+import chatRoutes from "./Routes/chatRoutes.js";
+import messageRoutes from "./Routes/messageRoutes.js";
 import cors from "cors";
 import "dotenv/config";
 
@@ -49,6 +51,8 @@ app.use("/api/team", teamRoutes);
 app.use("/api/holiday", holidayRoutes);
 app.use("/api/leave", leaveRoutes);
 app.use("/api/client", clientRoutes);
+app.use("/api/chat", chatRoutes);
+app.use("/api/message", messageRoutes);
 const server = app.listen(port, () => {
   console.log("server started");
 });
