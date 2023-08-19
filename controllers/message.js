@@ -38,7 +38,7 @@ export const sendMessage = async (req, res) => {
         .then((message) => message.populate("chat"))
         .then((message) =>
           Employee.populate(message, {
-            path: "chat.users",
+            path: "chat.employees",
             select: "name photo email",
           })
         ),
@@ -46,7 +46,6 @@ export const sendMessage = async (req, res) => {
         latestMessage: newMessage._id,
       }),
     ]);
-    console.log(updatedChat);
 
     return res.json(message);
   } catch (error) {

@@ -1,4 +1,5 @@
 import express from "express";
+import { Server } from "socket.io";
 import mongoose from "mongoose";
 import designationRoutes from "./Routes/designationRoutes.js";
 import employeeRoutes from "./Routes/employeeRoutes.js";
@@ -53,6 +54,42 @@ app.use("/api/leave", leaveRoutes);
 app.use("/api/client", clientRoutes);
 app.use("/api/chat", chatRoutes);
 app.use("/api/message", messageRoutes);
+
+app.all("*", (req, res) => res.json("Not Valid"));
+
 const server = app.listen(port, () => {
   console.log("server started");
+});
+
+const io = new Server(server, {
+  pingTimeout: 60000,
+  cors: {
+    origin: "http://localhost:3000",
+  },
+});
+
+io.on("connection", (socket) => {
+  console.log("connected");
+  socket.on("setup", (employeeData) => {
+    socket.join(employeeData._id);
+    socket.emit("connected");
+  });
+
+  socket.on("join-chat", (room) => {
+    socket.join(room);
+    console.log("joined chat " + room);
+  });
+
+  socket.on("new-message", (newMessageRecieved) => {
+    var chat = newMessageRecieved.data.chat;
+    console.log(newMessageRecieved.data);
+    if (!chat.employees) return console.log("chat.users not defined");
+
+    chat.employees.forEach((user) => {
+      console.log(user.name);
+      if (user._id == newMessageRecieved.data.sender._id) return;
+
+      socket.in(user._id).emit("message recieved", newMessageRecieved);
+    });
+  });
 });

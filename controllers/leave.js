@@ -34,11 +34,7 @@ export const getLeave = async (req, res) => {
 //get all leave
 export const getAllLeave = async (req, res) => {
   try {
-    const data = await Leave.find({}).populate(
-      "employeeId",
-      "employeeName",
-      "image"
-    );
+    const data = await Leave.find({}).populate("employeeId");
     res.status(200).json({ status: "success", data });
   } catch (error) {
     console.log(error);
