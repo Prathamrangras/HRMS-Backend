@@ -4,6 +4,8 @@ const client_schema = mongoose.Schema(
   {
     _id: String,
     name: String,
+    dateOfBirth: String,
+    Address: String,
     Comapny: String,
     designation: String,
     Photo: String,
