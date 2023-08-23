@@ -5,10 +5,13 @@ import Email from "../utils/email.js";
 //create a new Client
 export const createClient = async (req, res) => {
   try {
-    const data = await Client.create({ _id: genId(), ...req.body });
-
+    req.body._id = genId();
+    const data = await Client.create({ ...req.body.client });
     const url = "http://localhost/3000/login";
-    new Email(req.body, url).sendWelcome(data.email, req.body.password);
+    new Email(req.body.client, url).sendWelcome(
+      data.email,
+      req.body.client.password
+    );
     res.status(200).json(data);
   } catch (error) {
     console.log(error);
