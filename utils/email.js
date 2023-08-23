@@ -1,8 +1,4 @@
 import nodemailer from "nodemailer";
-import { dirname } from "path";
-import { fileURLToPath } from "url";
-
-const __dirname = dirname(fileURLToPath(import.meta.url));
 
 class Email {
   constructor(user, url) {
@@ -14,7 +10,6 @@ class Email {
 
   newTransport() {
     //send in blue
-
     return nodemailer.createTransport({
       host: process.env.EMAIL_HOST,
       port: 587,

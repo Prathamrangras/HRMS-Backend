@@ -6,13 +6,13 @@ const holiday_schema = mongoose.Schema({
   day: {
     type: String,
     enum: [
+      "sunday",
       "monday",
       "tuesday",
       "wednesday",
       "thursday",
       "friday",
       "saturday",
-      "sunday",
     ],
   },
   date: Date,
